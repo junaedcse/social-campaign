@@ -1,0 +1,21 @@
+{
+  "campaign_id": "CAMP_2025_003",
+  "campaign_name": "Beauté et Bien-être",
+  "target_market": "France",
+  "language": "fr",
+  "target_audience": "Women aged 25-50 interested in natural beauty products",
+  "products": [
+    {
+      "product_id": "PROD_004",
+      "product_name": "FreshShampoo",
+      "description": "Organic sulfate-free shampoo with natural botanicals",
+      "existing_image": "freshshampoo.png"
+    }
+  ],
+  "campaign_message": "Natural Beauty, Naturally You - Embrace Your Radiance!",
+  "campaign_tagline": "Beauté Naturelle",
+  "brand_colors": ["#FBBC05", "#34A853"],
+  "call_to_action": "Découvrir",
+  "aspect_ratios": ["1:1", "9:16", "16:9"],
+  "notes": "Highlight natural ingredients and gentle formula. Use soft, elegant imagery with natural lighting."
+}

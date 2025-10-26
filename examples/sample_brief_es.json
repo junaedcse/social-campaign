@@ -1,0 +1,27 @@
+{
+  "campaign_id": "CAMP_2025_002",
+  "campaign_name": "Energía y Nutrición",
+  "target_market": "Spain",
+  "language": "es",
+  "target_audience": "Active adults and fitness enthusiasts aged 18-45",
+  "products": [
+    {
+      "product_id": "PROD_003",
+      "product_name": "PowerBar",
+      "description": "High-protein energy bar for athletes and active individuals",
+      "existing_image": "powerbar.png"
+    },
+    {
+      "product_id": "PROD_001",
+      "product_name": "EcoBottle",
+      "description": "Sustainable reusable water bottle",
+      "existing_image": "ecobottle.png"
+    }
+  ],
+  "campaign_message": "Fuel Your Passion - Natural Energy for Peak Performance!",
+  "campaign_tagline": "Rendimiento Natural",
+  "brand_colors": ["#EA4335", "#34A853"],
+  "call_to_action": "Comprar Ahora",
+  "aspect_ratios": ["1:1", "9:16", "16:9"],
+  "notes": "Focus on natural ingredients and athletic performance. Use dynamic, action-oriented imagery."
+}

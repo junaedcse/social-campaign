@@ -1,0 +1,14 @@
+{
+  "brand_name": "EcoTech Solutions",
+  "logo_required": false,
+  "logo_min_size_percent": 5.0,
+  "required_colors": ["#34A853", "#4285F4"],
+  "forbidden_colors": ["#FF0000", "#000000"],
+  "color_tolerance": 30,
+  "min_text_size": 24,
+  "max_text_length": 150,
+  "forbidden_words": ["cheap", "inferior", "fake"],
+  "min_image_quality": 70,
+  "required_aspect_ratios": ["1:1", "9:16", "16:9"],
+  "compliance_level": "standard"
+}

@@ -1,0 +1,28 @@
+{
+  "campaign_id": "CAMP_2025_004",
+  "campaign_name": "Tech Innovation Series",
+  "target_market": "Germany",
+  "language": "de",
+  "target_audience": "Tech-savvy professionals aged 30-55",
+  "products": [
+    {
+      "product_id": "PROD_002",
+      "product_name": "SmartWatch",
+      "description": "Advanced fitness tracking smartwatch",
+      "existing_image": "smartwatch.png"
+    },
+    {
+      "product_id": "PROD_005",
+      "product_name": "WirelessEarbuds",
+      "description": "Premium noise-canceling wireless earbuds",
+      "generate_image": true,
+      "image_prompt": "Sleek black wireless earbuds with charging case, modern tech aesthetic, product photography, white background"
+    }
+  ],
+  "campaign_message": "Innovation That Moves With You - Technology Meets Lifestyle!",
+  "campaign_tagline": "Intelligente Technologie",
+  "brand_colors": ["#4285F4", "#34A853"],
+  "call_to_action": "Jetzt Kaufen",
+  "aspect_ratios": ["1:1", "9:16", "16:9"],
+  "notes": "Demonstrate this brief will trigger AI image generation for WirelessEarbuds since no existing_image is provided."
+}

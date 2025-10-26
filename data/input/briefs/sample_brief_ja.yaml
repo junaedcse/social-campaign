@@ -1,0 +1,32 @@
+campaign_id: CAMP_2025_005
+campaign_name: Summer Refresh Collection
+target_market: Japan
+language: ja
+target_audience: Young professionals aged 20-35 interested in lifestyle products
+
+products:
+  - product_id: PROD_001
+    product_name: EcoBottle
+    description: Eco-friendly water bottle with temperature control
+    existing_image: ecobottle.png
+  
+  - product_id: PROD_004
+    product_name: FreshShampoo
+    description: Refreshing organic shampoo
+    existing_image: freshshampoo.png
+
+campaign_message: "Refresh Your Day, Naturally - Summer Essentials for Modern Living!"
+campaign_tagline: "夏の新鮮さ"
+brand_colors:
+  - "#34A853"
+  - "#FBBC05"
+
+call_to_action: "今すぐ購入"
+aspect_ratios:
+  - "1:1"
+  - "9:16" 
+  - "16:9"
+
+notes: |
+  Target Japanese market with emphasis on quality and natural ingredients.
+  Use clean, minimalist design aesthetic popular in Japanese advertising.

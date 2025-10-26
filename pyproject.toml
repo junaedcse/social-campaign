@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "creative-automation-pipeline"
+version = "1.0.0"
+description = "AI-powered creative automation pipeline for social ad campaigns"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    {name = "Creative Automation Team"}
+]
+keywords = ["ai", "automation", "creative", "social-media", "openai", "dalle"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "openai>=1.54.3",
+    "Pillow>=10.4.0",
+    "pydantic>=2.9.2",
+    "pydantic-settings>=2.5.2",
+    "pyyaml>=6.0.2",
+    "streamlit>=1.39.0",
+    "python-dotenv>=1.0.1",
+    "loguru>=0.7.2",
+    "rich>=13.9.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.3",
+    "pytest-mock>=3.14.0",
+    "black>=24.10.0",
+]
+compliance = [
+    "opencv-python>=4.10.0.84",
+    "colorthief>=0.2.1",
+    "numpy>=2.1.3",
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

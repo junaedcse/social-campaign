@@ -1,0 +1,27 @@
+{
+  "campaign_id": "CAMP_2025_001",
+  "campaign_name": "Spring Wellness Collection",
+  "target_market": "United States",
+  "language": "en",
+  "target_audience": "Health-conscious millennials aged 25-40",
+  "products": [
+    {
+      "product_id": "PROD_001",
+      "product_name": "EcoBottle",
+      "description": "Sustainable reusable water bottle made from recycled materials",
+      "existing_image": "ecobottle.png"
+    },
+    {
+      "product_id": "PROD_002",
+      "product_name": "SmartWatch",
+      "description": "Fitness tracking smartwatch with health monitoring features",
+      "existing_image": "smartwatch.png"
+    }
+  ],
+  "campaign_message": "Stay Healthy, Stay Active - Your Wellness Journey Starts Here!",
+  "campaign_tagline": "Empower Your Lifestyle",
+  "brand_colors": ["#34A853", "#4285F4"],
+  "call_to_action": "Shop Now",
+  "aspect_ratios": ["1:1", "9:16", "16:9"],
+  "notes": "Emphasize eco-friendly and health benefits. Use bright, energetic imagery."
+}
