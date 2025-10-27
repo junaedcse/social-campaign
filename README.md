@@ -1,100 +1,292 @@
-#  Creative Automation Pipeline
+# Creative Automation Pipeline
 
-AI-powered creative automation pipeline for generating localized social media campaign assets at scale.
+> AI-powered creative automation system for generating localized social media campaign assets at scale with brand compliance validation.
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/streamlit-1.39.0-FF4B4B.svg)](https://streamlit.io)
 [![OpenAI](https://img.shields.io/badge/OpenAI-DALL--E--3-412991.svg)](https://openai.com)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ---
 
-## 🌟 Features
+## Table of Contents
 
-- ** Smart Asset Generation**: Automatically generate or reuse product images
-- **📐 Multiple Aspect Ratios**: Create assets for Instagram (1:1), Stories (9:16), and YouTube (16:9)
-- **🌍 Multi-Language Support**: 5 languages (English, Spanish, French, German, Japanese)
-- **✨ Text Overlays**: Automatic campaign message placement with wrapping
-- **📦 Organized Output**: Assets structured by campaign, product, and aspect ratio
-- **🖥️ Interactive UI**: User-friendly Streamlit web interface
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Usage Guide](#usage-guide)
+- [Campaign Brief Format](#campaign-brief-format)
+- [Project Structure](#project-structure)
+- [Utility Tools](#utility-tools)
+- [Configuration](#configuration)
+- [Testing](#testing)
+- [Output Structure](#output-structure)
+- [Technology Stack](#technology-stack)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
 
 ---
 
-## 📋 Prerequisites
+## Overview
 
-- Python 3.11 or higher
-- OpenAI API key (for image generation and translation)
-- pip (Python package manager)
+The Creative Automation Pipeline is an enterprise-grade solution for automating the creation of multi-format, multi-language social media campaign assets. It combines AI-powered image generation, intelligent text processing, and brand compliance validation to streamline creative production workflows.
+
+**Perfect for:**
+- Marketing teams managing multi-channel campaigns
+- Social media managers needing rapid content creation
+- Agencies handling multiple client accounts
+- E-commerce platforms requiring product campaign automation
+- Global brands requiring localized content at scale
 
 ---
 
-##  Quick Start
+## Key Features
 
-### 1. Install Dependencies
+### 🎨 **Intelligent Asset Generation**
+- **Smart Image Handling**: Automatically generate product images or reuse existing assets
+- **AI-Powered Generation**: DALL-E 3 integration for high-quality image creation
+- **Batch Processing**: Process multiple products and campaigns simultaneously
 
+### 📐 **Multi-Format Output**
+- **Instagram Posts** (1:1) - Square format for feed posts
+- **Instagram Stories** (9:16) - Vertical format for Stories, Reels, TikTok
+- **YouTube Thumbnails** (16:9) - Widescreen format for video platforms
+
+### 🌍 **Multilingual Support**
+- English (en), Spanish (es), French (fr), German (de), Japanese (ja)
+- AI-powered translation with GPT-4
+- Context-aware localization
+
+### ✅ **Brand Compliance**
+- Color palette validation
+- Font consistency checking
+- Text placement verification
+- Automated compliance reporting
+
+### 🎯 **Professional Text Rendering**
+- Multi-line text wrapping with intelligent line breaks
+- Shadow effects for enhanced readability
+- Brand color integration
+- Custom font support
+
+### 📊 **Organized Workflow**
+- Campaign-based folder structure
+- Metadata tracking and export
+- Comprehensive logging system
+- Progress monitoring and error handling
+
+---
+
+## Prerequisites
+
+### System Requirements
+- **Python**: Version 3.11 or higher
+- **Operating System**: Windows 10+, macOS 10.14+, or Linux (Ubuntu 20.04+)
+- **Memory**: Minimum 4GB RAM (8GB recommended)
+- **Storage**: 500MB for installation + space for generated assets
+
+### API Requirements
+- **OpenAI API Key**: Required for image generation and translation
+  - Sign up at [OpenAI Platform](https://platform.openai.com)
+  - Create an API key in your account dashboard
+  - Ensure sufficient credits for DALL-E 3 and GPT-4 usage
+
+### Python Package Manager
+- **pip**: Built-in with Python
+- **conda**: Optional but recommended for environment management
+
+---
+
+## Installation
+
+### Method 1: Using pip (Recommended)
+
+#### Step 1: Create Virtual Environment
 ```bash
-cd /Users/admin/Codes/creative-automation-pipeline
+# Create virtual environment
+python3 -m venv venv
+
+# Activate virtual environment
+# On macOS/Linux:
+source venv/bin/activate
+
+# On Windows:
+venv\Scripts\activate
+```
+
+#### Step 2: Install Dependencies
+```bash
+# Standard installation
 pip install -r requirements.txt
 ```
 
-### 2. Configure API Key
+#### Step 3: Handle Problematic Libraries (If Needed)
 
-Create a `.env` file:
+If you encounter issues with `opencv-python` or `pyarrow`, use this alternative approach:
 
 ```bash
+# Remove opencv-python and pyarrow from requirements.txt
+# Then install them separately:
+
+# Install OpenCV
+pip install opencv-python-headless
+
+# Install PyArrow
+pip install pyarrow
+
+# Install remaining dependencies
+pip install -r requirements.txt
+```
+
+**Note**: `opencv-python-headless` is recommended for server environments as it excludes GUI dependencies.
+
+---
+
+### Method 2: Using Conda
+
+#### Step 1: Create Conda Environment
+```bash
+# Create environment with Python 3.12
+conda create -n creative-pipeline python=3.12
+
+# Activate environment
+conda activate creative-pipeline
+```
+
+#### Step 2: Install Core Dependencies via Conda
+```bash
+# Install commonly problematic packages via conda first
+conda install -c conda-forge opencv pillow numpy pandas
+
+# Install PyArrow via conda (more reliable than pip)
+conda install -c conda-forge pyarrow
+```
+
+#### Step 3: Install Remaining Dependencies via pip
+```bash
+# Install other requirements
+pip install streamlit openai loguru pydantic python-dotenv pyyaml
+```
+
+---
+
+### Method 3: Docker (Coming Soon)
+
+```bash
+# Build image
+docker build -t creative-pipeline .
+
+# Run container
+docker run -p 8501:8501 -v $(pwd)/data:/app/data creative-pipeline
+```
+
+---
+
+### Verification
+
+After installation, verify your setup:
+
+```bash
+# Check Python version
+python --version  # Should be 3.11+
+
+# Verify key packages
+python -c "import streamlit, openai, PIL, cv2; print('✓ All packages installed')"
+
+# Run setup verification script
+python tests/verify_setup.py
+```
+
+---
+
+## Quick Start
+
+### 1. Environment Configuration
+
+Create your environment file:
+
+```bash
+# Copy example environment file
 cp .env.example .env
 ```
 
-Edit `.env` and add your OpenAI API key:
+Edit `.env` with your configuration:
 
-```
-OPENAI_API_KEY=sk-your-key-here
-```
-
-### 3. Run the Application
-
-**Option A: Using the start script**
 ```bash
+# Required
+OPENAI_API_KEY=sk-your-actual-api-key-here
+
+# Optional
+LOG_LEVEL=INFO
+MAX_IMAGE_SIZE=1024
+OUTPUT_DIR=data/output
+SUPPORTED_LANGUAGES=en,es,fr,de,ja
+```
+
+### 2. Launch Application
+
+**Option A: Quick Start Script**
+```bash
+chmod +x start.sh
 ./start.sh
 ```
 
-**Option B: Direct command**
+**Option B: Direct Launch**
 ```bash
 streamlit run app.py
 ```
 
-The app will open in your browser at `http://localhost:8501`
+**Option C: With Custom Port**
+```bash
+streamlit run app.py --server.port 8080
+```
+
+The application will open automatically in your browser at `http://localhost:8501`
 
 ---
 
-## 📖 Usage Guide
+## Usage Guide
 
-### Step 1: Upload Campaign Brief
+### Complete Workflow
 
-1. Click **"Upload campaign brief"** 
-2. Select a JSON or YAML file with your campaign details
-3. Or choose an example from the dropdown
+#### Step 1: Prepare Campaign Brief
 
-### Step 2: Upload Product Images (Optional)
+Create a JSON or YAML file with your campaign details (see [Campaign Brief Format](#campaign-brief-format))
 
-1. Upload product images if you have them
-2. If images are missing, AI will generate them automatically
+#### Step 2: Upload Assets
 
-### Step 3: Generate Assets
+1. Click **"Upload Campaign Brief"** in the sidebar
+2. Select your JSON/YAML file or choose an example
+3. Optionally upload product images to `data/input/assets/`
+4. Missing images will be AI-generated automatically
+
+#### Step 3: Configure Generation
+
+1. Review campaign details in the main panel
+2. Verify product list and specifications
+3. Check target languages and aspect ratios
+4. Review brand guidelines if applicable
+
+#### Step 4: Generate Campaign
 
 1. Click **"Generate Campaign Assets"**
-2. Wait for processing (progress bar shows status)
-3. View generated assets grouped by product
+2. Monitor progress via the progress bar
+3. Review generated assets by product
+4. Check compliance report if brand guidelines are active
 
-### Step 4: Download Results
+#### Step 5: Download Results
 
-- Download individual assets using the buttons below each image
-- Or download all assets as a ZIP file
+- **Individual Downloads**: Click download buttons below each image
+- **Bulk Download**: Use "Download All Assets as ZIP" button
+- **Metadata**: Export campaign metadata for record-keeping
 
 ---
 
-## 📄 Campaign Brief Format
+## Campaign Brief Format
 
-### JSON Example
+### JSON Format (Recommended)
 
 ```json
 {
@@ -102,230 +294,637 @@ The app will open in your browser at `http://localhost:8501`
   "campaign_name": "Spring Wellness Collection",
   "target_market": "United States",
   "language": "en",
-  "target_audience": "Health-conscious millennials",
+  "target_audience": "Health-conscious millennials aged 25-40",
   "products": [
     {
       "product_id": "PROD_001",
       "product_name": "EcoBottle",
-      "description": "Sustainable water bottle",
-      "existing_image": "ecobottle.png"
+      "description": "Eco-friendly stainless steel water bottle with double-wall insulation",
+      "existing_image": "ecobottle.png",
+      "generate_image": false
+    },
+    {
+      "product_id": "PROD_002",
+      "product_name": "YogaMat",
+      "description": "Premium non-slip yoga mat with alignment markers",
+      "generate_image": true
     }
   ],
   "campaign_message": "Stay Healthy, Stay Active!",
   "campaign_tagline": "Empower Your Lifestyle",
   "brand_colors": ["#34A853", "#4285F4"],
   "call_to_action": "Shop Now",
-  "aspect_ratios": ["1:1", "9:16", "16:9"]
+  "aspect_ratios": ["1:1", "9:16", "16:9"],
+  "brand_guidelines": {
+    "primary_colors": ["#34A853"],
+    "secondary_colors": ["#4285F4"],
+    "fonts": ["Roboto", "Open Sans"],
+    "compliance_level": "strict"
+  }
 }
 ```
 
-### YAML Example
+### YAML Format
 
 ```yaml
 campaign_id: CAMP_2025_002
-campaign_name: Summer Collection
-language: es
+campaign_name: Summer Tech Collection
+target_market: Global
+language: en
+target_audience: Tech-savvy professionals
+
 products:
-  - product_name: PowerBar
-    description: High-protein energy bar
-    existing_image: powerbar.png
-campaign_message: "Fuel Your Passion!"
-aspect_ratios: ["1:1", "9:16", "16:9"]
+  - product_id: PROD_003
+    product_name: SmartWatch
+    description: Advanced fitness tracker with heart rate monitoring
+    existing_image: smartwatch.png
+    generate_image: false
+  
+  - product_id: PROD_004
+    product_name: WirelessEarbuds
+    description: Noise-cancelling wireless earbuds with 30hr battery
+    generate_image: true
+
+campaign_message: "Experience the Future"
+campaign_tagline: "Innovation Meets Style"
+brand_colors:
+  - "#FF6B6B"
+  - "#4ECDC4"
+call_to_action: "Discover More"
+aspect_ratios:
+  - "1:1"
+  - "9:16"
+  - "16:9"
 ```
 
-See `examples/` directory for more samples.
+### Field Descriptions
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `campaign_id` | string | Yes | Unique campaign identifier |
+| `campaign_name` | string | Yes | Descriptive campaign name |
+| `target_market` | string | No | Geographic target market |
+| `language` | string | Yes | Primary language code (en/es/fr/de/ja) |
+| `target_audience` | string | No | Audience demographics |
+| `products` | array | Yes | List of products (min 1) |
+| `campaign_message` | string | Yes | Primary campaign message |
+| `campaign_tagline` | string | No | Secondary tagline |
+| `brand_colors` | array | No | Hex color codes for brand colors |
+| `call_to_action` | string | No | CTA button text |
+| `aspect_ratios` | array | Yes | Output formats (1:1, 9:16, 16:9) |
+| `brand_guidelines` | object | No | Brand compliance rules |
+
+**Product Object Schema:**
+```json
+{
+  "product_id": "string (required)",
+  "product_name": "string (required)",
+  "description": "string (required for generation)",
+  "existing_image": "string (filename in data/input/assets/)",
+  "generate_image": "boolean (default: false)"
+}
+```
+
+See `examples/` directory for complete sample briefs.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 creative-automation-pipeline/
-├── app.py                      # Streamlit UI (main entry point)
-├── start.sh                    # Quick start script
-├── requirements.txt            # Python dependencies
-├── .env.example               # Environment template
 │
-├── src/
-│   ├── models/
-│   │   └── campaign.py        # Data models
-│   ├── services/
-│   │   ├── pipeline.py        # Main pipeline orchestrator
-│   │   ├── brief_parser.py    # JSON/YAML parser
-│   │   ├── asset_manager.py   # Asset management
-│   │   ├── image_generator.py # DALL-E integration
-│   │   ├── image_processor.py # Image processing
-│   │   ├── translator.py      # Translation service
-│   │   └── output_manager.py  # Output organization
-│   ├── utils/
-│   │   ├── logger.py          # Logging
-│   │   └── validators.py      # Validation
-│   └── config.py              # Configuration
+├── app.py                          # Main Streamlit application
+├── start.sh                        # Quick launch script
+├── requirements.txt                # Python dependencies
+├── pyproject.toml                  # Project metadata
+├── .env.example                    # Environment template
+├── .gitignore                      # Git ignore rules
 │
-├── data/
+├── src/                            # Source code
+│   ├── __init__.py
+│   ├── config.py                   # Global configuration
+│   │
+│   ├── models/                     # Data models
+│   │   ├── __init__.py
+│   │   ├── campaign.py             # Campaign data structures
+│   │   └── compliance.py           # Compliance models
+│   │
+│   ├── services/                   # Core business logic
+│   │   ├── __init__.py
+│   │   ├── pipeline.py             # Main pipeline orchestrator
+│   │   ├── pipeline_enhanced.py   # Enhanced pipeline with compliance
+│   │   ├── brief_parser.py         # JSON/YAML parser
+│   │   ├── asset_manager.py        # Asset loading and management
+│   │   ├── image_generator.py      # DALL-E 3 integration
+│   │   ├── image_processor.py      # Image manipulation and text overlay
+│   │   ├── translator.py           # GPT-4 translation service
+│   │   └── output_manager.py       # File organization and export
+│   │
+│   ├── compliance/                 # Brand compliance
+│   │   ├── __init__.py
+│   │   ├── brand_checker.py        # Color and font validation
+│   │   ├── color_analyzer.py       # Color extraction and matching
+│   │   └── content_validator.py    # Content compliance rules
+│   │
+│   ├── ui/                         # UI components
+│   │   └── compliance_page.py      # Compliance dashboard
+│   │
+│   └── utils/                      # Utility functions
+│       ├── __init__.py
+│       ├── logger.py               # Logging configuration
+│       ├── validators.py           # Input validation
+│       └── font_finder.py          # System font discovery
+│
+├── data/                           # Data directory
 │   ├── input/
-│   │   ├── assets/            # Product images
-│   │   └── briefs/            # Campaign briefs
-│   └── output/                # Generated campaigns
+│   │   ├── assets/                 # Product images
+│   │   └── briefs/                 # Campaign briefs
+│   └── output/                     # Generated campaigns
+│       └── CAMP_ID_TIMESTAMP/      # Campaign output folder
+│           ├── ProductName/        # Product subfolder
+│           │   ├── 1x1.png        # Square format
+│           │   ├── 9x16.png       # Vertical format
+│           │   └── 16x9.png       # Horizontal format
+│           ├── metadata.json       # Campaign metadata
+│           └── compliance_report.json  # Compliance results
 │
-├── examples/                  # Sample campaign briefs
-└── tests/                     # Test scripts
+├── examples/                       # Example campaign briefs
+│   ├── sample_brief_en.json
+│   ├── sample_brief_es.json
+│   ├── sample_brief_fr.json
+│   ├── sample_brief_de.json
+│   ├── sample_brief_ja.yaml
+│   └── brand_guidelines.json
+│
+├── tests/                          # Test scripts
+│   ├── verify_setup.py             # Setup verification
+│   ├── test_phase2.py              # Core functionality tests
+│   ├── test_phase3.py              # Integration tests
+│   └── test_phase4.py              # End-to-end tests
+│
+├── tools/                          # Utility tools
+│   ├── generate_images.py          # Standalone image generator
+│   └── project_structure.py        # Structure documentation generator
+│
+├── logs/                           # Application logs
+│   └── pipeline_YYYY-MM-DD.log
+│
+└── docs/                           # Documentation
+    ├── QUICKSTART.md               # Quick start guide
+    ├── COMPLIANCE_GUIDE.md         # Brand compliance documentation
+    ├── GUIDELINES_UPDATE.md        # Guidelines management
+    └── INTEGRATION_COMPLETE.md     # Integration documentation
 ```
 
 ---
 
-##  Supported Features
+## Utility Tools
 
-### Languages
-- 🇺🇸 English (en)
-- 🇪🇸 Spanish (es)
-- 🇫🇷 French (fr)
-- 🇩🇪 German (de)
-- 🇯🇵 Japanese (ja)
+### 1. Generate Images (`tools/generate_images.py`)
 
-### Aspect Ratios
-- **1:1** - Instagram posts, profile pictures
-- **9:16** - Instagram Stories, TikTok, Reels
-- **16:9** - YouTube thumbnails, website banners
+Standalone CLI tool for batch image generation without the full pipeline.
 
-### Image Processing
-- Automatic resizing to target aspect ratios
-- Text overlay with campaign messages
-- Multi-line text wrapping
-- Shadow effects for readability
-- Brand color support
+**Usage:**
+```bash
+# Generate single product image
+python tools/generate_images.py \
+  --product "Eco Water Bottle" \
+  --description "Sustainable stainless steel water bottle" \
+  --output data/input/assets/ecobottle.png
+
+# Generate multiple images from CSV
+python tools/generate_images.py \
+  --csv products.csv \
+  --output-dir data/input/assets/
+
+# Generate with specific style
+python tools/generate_images.py \
+  --product "Smart Watch" \
+  --description "Modern fitness tracker" \
+  --style "professional product photography" \
+  --size 1024x1024
+```
+
+**Features:**
+- Batch processing from CSV files
+- Custom image sizes and styles
+- Progress tracking
+- Error handling and retry logic
+- Automatic naming conventions
+
+**CSV Format for Batch Generation:**
+```csv
+product_name,description,output_filename
+EcoBottle,Sustainable water bottle,ecobottle.png
+SmartWatch,Advanced fitness tracker,smartwatch.png
+YogaMat,Premium non-slip mat,yogamat.png
+```
+
+### 2. Project Structure Generator (`tools/project_structure.py`)
+
+Automatically generates visual project structure documentation.
+
+**Usage:**
+```bash
+# Generate structure with default settings
+python tools/project_structure.py
+
+# Generate with custom depth
+python tools/project_structure.py --max-depth 4
+
+# Include hidden files
+python tools/project_structure.py --show-hidden
+
+# Export to file
+python tools/project_structure.py --output PROJECT_STRUCTURE.md
+```
+
+**Features:**
+- Visual tree representation
+- File size and line count statistics
+- Automatic emoji icons by file type
+- Markdown export capability
+- Configurable depth and filters
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
-Edit `src/config.py` or use environment variables:
+### Environment Variables
 
-```bash
-# Required
-OPENAI_API_KEY=your_key_here
+| Variable | Description | Default | Required |
+|----------|-------------|---------|----------|
+| `OPENAI_API_KEY` | OpenAI API key for DALL-E and GPT-4 | - | Yes |
+| `LOG_LEVEL` | Logging level (DEBUG/INFO/WARNING/ERROR) | INFO | No |
+| `MAX_IMAGE_SIZE` | Maximum image dimension in pixels | 1024 | No |
+| `OUTPUT_DIR` | Output directory path | data/output | No |
+| `SUPPORTED_LANGUAGES` | Comma-separated language codes | en,es,fr,de,ja | No |
+| `ENABLE_COMPLIANCE` | Enable brand compliance checking | false | No |
+| `FONT_PATH` | Custom font file path | - | No |
 
-# Optional
-LOG_LEVEL=INFO
-MAX_IMAGE_SIZE=1024
-SUPPORTED_LANGUAGES=en,es,fr,de,ja
+### Configuration File (`src/config.py`)
+
+```python
+from pathlib import Path
+import os
+
+class Config:
+    # API Configuration
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    
+    # Directory Paths
+    BASE_DIR = Path(__file__).parent.parent
+    DATA_DIR = BASE_DIR / "data"
+    INPUT_DIR = DATA_DIR / "input"
+    OUTPUT_DIR = DATA_DIR / "output"
+    ASSETS_DIR = INPUT_DIR / "assets"
+    BRIEFS_DIR = INPUT_DIR / "briefs"
+    
+    # Image Processing
+    MAX_IMAGE_SIZE = int(os.getenv("MAX_IMAGE_SIZE", 1024))
+    ASPECT_RATIOS = {
+        "1:1": (1080, 1080),
+        "9:16": (1080, 1920),
+        "16:9": (1920, 1080)
+    }
+    
+    # Supported Languages
+    LANGUAGES = {
+        "en": "English",
+        "es": "Spanish",
+        "fr": "French",
+        "de": "German",
+        "ja": "Japanese"
+    }
+    
+    # Logging
+    LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
+    LOG_DIR = BASE_DIR / "logs"
 ```
 
 ---
 
-##  Testing
+## Testing
 
-### Test Phase 1 (Setup)
+### Setup Verification
+
 ```bash
-python3 verify_setup.py
+# Verify installation and configuration
+python tests/verify_setup.py
 ```
 
-### Test Phase 2 (Core Pipeline)
+**Checks:**
+- Python version compatibility
+- Required packages installation
+- Directory structure
+- Environment variables
+- API connectivity (if key provided)
+
+### Unit Tests
+
 ```bash
-python3 test_phase2.py
+# Test core pipeline functionality
+python tests/test_phase2.py
+
+# Test image processing
+python tests/test_phase3.py
+
+# Test end-to-end workflow
+python tests/test_phase4.py
 ```
 
-### Test Full Pipeline (with API key)
+### Integration Tests
+
 ```bash
-python3 -c "from src.services.pipeline import CampaignPipeline; \
-pipeline = CampaignPipeline(); \
-pipeline.run('examples/sample_brief_en.json')"
+# Test with sample brief (no API required)
+python -m pytest tests/ -v
+
+# Test with API calls (requires API key)
+python -m pytest tests/ -v --with-api
+```
+
+### Manual Testing
+
+```bash
+# Run pipeline with example brief
+python -c "
+from src.services.pipeline import CampaignPipeline
+pipeline = CampaignPipeline()
+pipeline.run('examples/sample_brief_en.json')
+"
 ```
 
 ---
 
-## 📊 Output Structure
+## Output Structure
 
-Generated campaigns are organized as:
+### Campaign Output Format
 
 ```
 data/output/
-└── CAMP_2025_001_20251025_143022/
-    ├── EcoBottle/
-    │   ├── 1x1.png          # Instagram post
-    │   ├── 9x16.png         # Stories format
-    │   └── 16x9.png         # YouTube format
+└── CAMP_2025_001_20251027_143022/          # Campaign folder (ID + timestamp)
+    ├── EcoBottle/                           # Product subfolder
+    │   ├── 1x1.png                          # Instagram post (1080x1080)
+    │   ├── 9x16.png                         # Stories format (1080x1920)
+    │   └── 16x9.png                         # YouTube format (1920x1080)
+    │
     ├── SmartWatch/
     │   ├── 1x1.png
     │   ├── 9x16.png
     │   └── 16x9.png
-    └── metadata.json        # Campaign metadata
+    │
+    ├── metadata.json                        # Campaign metadata
+    └── compliance_report.json               # Brand compliance results (if enabled)
+```
+
+### Metadata File Structure
+
+```json
+{
+  "campaign_id": "CAMP_2025_001",
+  "campaign_name": "Spring Wellness Collection",
+  "generated_at": "2025-10-27T14:30:22",
+  "language": "en",
+  "total_products": 2,
+  "total_assets": 6,
+  "products": [
+    {
+      "product_name": "EcoBottle",
+      "product_id": "PROD_001",
+      "assets_generated": 3,
+      "image_source": "existing",
+      "formats": ["1:1", "9:16", "16:9"]
+    }
+  ],
+  "processing_time_seconds": 45.3,
+  "api_calls": {
+    "image_generation": 1,
+    "translation": 0
+  }
+}
 ```
 
 ---
 
-##  Use Cases
+## Technology Stack
 
-- **Marketing Teams**: Generate campaign assets at scale
-- **Social Media Managers**: Create multi-format content quickly
-- **Agencies**: Automate creative production for multiple clients
-- **E-commerce**: Generate product campaign images automatically
-- **Localization**: Adapt campaigns for different markets
+### Core Framework
+- **[Streamlit 1.39.0](https://streamlit.io)** - Interactive web interface
+- **[Python 3.11+](https://python.org)** - Primary programming language
 
----
+### AI & Machine Learning
+- **[OpenAI DALL-E 3](https://openai.com/dall-e-3)** - AI image generation
+- **[OpenAI GPT-4](https://openai.com/gpt-4)** - Natural language translation
 
-## 🛠️ Technology Stack
+### Image Processing
+- **[Pillow (PIL) 10.0+](https://python-pillow.org)** - Image manipulation
+- **[OpenCV 4.8+](https://opencv.org)** - Advanced image processing
 
-- **[Streamlit](https://streamlit.io)** - Web interface
-- **[OpenAI DALL-E 3](https://openai.com/dall-e-3)** - Image generation
-- **[OpenAI GPT-4](https://openai.com/gpt-4)** - Translation
-- **[Pillow](https://python-pillow.org)** - Image processing
-- **[Pydantic](https://docs.pydantic.dev)** - Data validation
-- **[Loguru](https://github.com/Delgan/loguru)** - Logging
+### Data Handling
+- **[Pydantic 2.0+](https://docs.pydantic.dev)** - Data validation and parsing
+- **[PyYAML](https://pyyaml.org)** - YAML file processing
+- **[PyArrow](https://arrow.apache.org/docs/python/)** - Efficient data structures
 
----
-
-## 📝 Notes
-
-### Without API Key
-You can still use the pipeline with existing images:
--  Parse campaign briefs
--  Load and process existing images
--  Resize to multiple aspect ratios
--  Add text overlays
--  AI image generation (requires API key)
--  Translation (requires API key)
-
-### With API Key
-All features enabled:
--  Everything from above
--  Generate missing product images
--  Translate campaign messages
+### Utilities
+- **[Loguru](https://github.com/Delgan/loguru)** - Advanced logging
+- **[python-dotenv](https://github.com/theskumar/python-dotenv)** - Environment management
+- **[Requests](https://requests.readthedocs.io)** - HTTP client
 
 ---
 
-## 🤝 Contributing
+## Troubleshooting
 
-This is a proof-of-concept project. Feel free to extend it with:
-- Additional aspect ratios
-- More image processing effects
-- Brand compliance validation
-- Performance analytics
-- Batch processing
+### Common Installation Issues
+
+#### Issue: OpenCV Installation Fails
+```bash
+# Solution 1: Use headless version
+pip uninstall opencv-python
+pip install opencv-python-headless
+
+# Solution 2: Install via conda
+conda install -c conda-forge opencv
+```
+
+#### Issue: PyArrow Compatibility Error
+```bash
+# Solution: Install specific version
+pip install pyarrow==14.0.1
+
+# Or use conda
+conda install -c conda-forge pyarrow
+```
+
+#### Issue: Pillow Import Error
+```bash
+# Reinstall with proper dependencies
+pip uninstall Pillow
+pip install Pillow --no-cache-dir
+```
+
+### Runtime Issues
+
+#### Issue: "API Key Not Found"
+```bash
+# Verify .env file exists and contains key
+cat .env | grep OPENAI_API_KEY
+
+# Check environment variable is loaded
+python -c "import os; print(os.getenv('OPENAI_API_KEY'))"
+```
+
+#### Issue: Image Generation Fails
+- Verify API key has sufficient credits
+- Check internet connectivity
+- Review logs in `logs/pipeline_YYYY-MM-DD.log`
+- Ensure product descriptions are detailed enough
+
+#### Issue: Font Not Found
+```bash
+# List available fonts
+python -c "from src.utils.font_finder import FontFinder; FontFinder.list_fonts()"
+
+# Specify custom font in .env
+echo "FONT_PATH=/path/to/your/font.ttf" >> .env
+```
+
+#### Issue: Output Directory Permission Denied
+```bash
+# Fix permissions
+chmod -R 755 data/output
+
+# Or change output directory
+export OUTPUT_DIR=/path/with/write/permission
+```
+
+### Performance Optimization
+
+```bash
+# Reduce image size for faster processing
+export MAX_IMAGE_SIZE=512
+
+# Disable compliance checking for speed
+export ENABLE_COMPLIANCE=false
+
+# Use existing images instead of generation
+# Set "generate_image": false in campaign brief
+```
 
 ---
 
-## 📄 License
+## Use Cases
 
-This project is for demonstration purposes.
+### Marketing Agencies
+- Generate campaign variations for A/B testing
+- Create multi-market campaigns with localized content
+- Rapid prototyping of creative concepts
+- Consistent brand application across products
+
+### E-commerce Platforms
+- Automated product launch campaigns
+- Seasonal collection promotions
+- Flash sale creative generation
+- Product category campaigns
+
+### Social Media Management
+- Multi-platform content creation (Instagram, TikTok, YouTube)
+- Story and post format optimization
+- Batch content scheduling preparation
+- Brand-consistent visual identity
+
+### Enterprise Marketing
+- Global campaign rollout automation
+- Regional market adaptation
+- Brand guideline enforcement
+- Compliance documentation
 
 ---
 
-## 🙏 Acknowledgments
+## Roadmap
 
-- OpenAI for DALL-E 3 and GPT-4 APIs
-- Streamlit for the amazing web framework
-- Pillow for image processing capabilities
+### Upcoming Features
+- [ ] Video asset generation support
+- [ ] Additional social platforms (Twitter, LinkedIn, Pinterest)
+- [ ] Advanced text animations
+- [ ] Template library management
+- [ ] Collaborative workflow features
+- [ ] Analytics and performance tracking
+- [ ] API access for programmatic usage
+- [ ] Mobile app companion
+
+### Planned Improvements
+- [ ] Enhanced AI image quality controls
+- [ ] Custom brand font upload
+- [ ] Advanced color palette generation
+- [ ] Batch campaign processing
+- [ ] Cloud storage integration
+- [ ] Real-time collaboration
+- [ ] Accessibility compliance (WCAG)
 
 ---
 
-## 📞 Support
+## Contributing
 
-For issues or questions:
-1. Check the documentation in this README
-2. Review example briefs in `examples/`
-3. Check logs in `logs/` directory
+We welcome contributions! Please follow these guidelines:
+
+### Development Setup
+```bash
+# Fork and clone repository
+git clone https://github.com/yourusername/creative-automation-pipeline
+cd creative-automation-pipeline
+
+# Create feature branch
+git checkout -b feature/amazing-feature
+
+# Install dev dependencies
+pip install -r requirements-dev.txt
+
+# Run tests
+pytest tests/ -v
+```
+
+### Code Standards
+- Follow PEP 8 style guide
+- Add docstrings to all functions
+- Include type hints
+- Write unit tests for new features
+- Update documentation
+
+### Pull Request Process
+1. Update README.md with new features
+2. Add tests for new functionality
+3. Ensure all tests pass
+4. Update version in `pyproject.toml`
+5. Submit PR with clear description
 
 ---
 
-**Built with ❤️ using Python and AI**
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Acknowledgments
+
+- **OpenAI** for providing DALL-E 3 and GPT-4 APIs
+- **Streamlit** for the excellent web framework
+- **Python Pillow** team for powerful image processing
+- **Open source community** for amazing tools and libraries
+
+---
+
+## Support & Contact
+
+### Documentation
+- [Quick Start Guide](docs/QUICKSTART.md)
+- [Compliance Guide](docs/COMPLIANCE_GUIDE.md)
+- [API Documentation](docs/API.md)
+
+### Community
+- Report bugs: [GitHub Issues](https://github.com/yourusername/repo/issues)
+- Feature requests: [GitHub Discussions](https://github.com/yourusername/repo/discussions)
+
+### Resources
+- Ch

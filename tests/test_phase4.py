@@ -193,7 +193,7 @@ else:
 # Test 6: Enhanced Pipeline
 print("\n Testing Enhanced Pipeline...")
 try:
-    from src.services.pipeline_enhanced import EnhancedCampaignPipeline
+    from src.services.pipeline import EnhancedCampaignPipeline
     
     pipeline = EnhancedCampaignPipeline(
         guidelines_path=Path("examples/brand_guidelines.json")
