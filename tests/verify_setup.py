@@ -9,7 +9,9 @@ import yaml
 from pathlib import Path
 
 BASE_PATH = Path("/Users/admin/Codes/creative-automation-pipeline")
-
+# Add parent directory (project root) to path
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
 
 def print_header(text):
     """Print a formatted header."""

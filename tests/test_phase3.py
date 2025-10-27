@@ -6,6 +6,11 @@ Tests Streamlit UI components and dependencies.
 import sys
 from pathlib import Path
 
+# Add parent directory (project root) to path
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+
+
 print("=" * 70)
 print("PHASE 3 VERIFICATION: Streamlit UI")
 print("=" * 70)
