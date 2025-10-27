@@ -172,18 +172,6 @@ pip install streamlit openai loguru pydantic python-dotenv pyyaml
 
 ---
 
-### Method 3: Docker (Coming Soon)
-
-```bash
-# Build image
-docker build -t creative-pipeline .
-
-# Run container
-docker run -p 8501:8501 -v $(pwd)/data:/app/data creative-pipeline
-```
-
----
-
 ### Verification
 
 After installation, verify your setup:
