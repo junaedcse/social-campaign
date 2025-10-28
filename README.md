@@ -380,89 +380,186 @@ See `examples/` directory for complete sample briefs.
 ## Project Structure
 
 ```
-creative-automation-pipeline/
-│
-├── app.py                          # Main Streamlit application
-├── start.sh                        # Quick launch script
-├── requirements.txt                # Python dependencies
-├── pyproject.toml                  # Project metadata
-├── .env.example                    # Environment template
-├── .gitignore                      # Git ignore rules
-│
-├── src/                            # Source code
-│   ├── __init__.py
-│   ├── config.py                   # Global configuration
-│   │
-│   ├── models/                     # Data models
-│   │   ├── __init__.py
-│   │   ├── campaign.py             # Campaign data structures
-│   │   └── compliance.py           # Compliance models
-│   │
-│   ├── services/                   # Core business logic
-│   │   ├── __init__.py
-│   │   ├── pipeline.py             # Main pipeline orchestrator
-│   │   ├── pipeline_enhanced.py   # Enhanced pipeline with compliance
-│   │   ├── brief_parser.py         # JSON/YAML parser
-│   │   ├── asset_manager.py        # Asset loading and management
-│   │   ├── image_generator.py      # DALL-E 3 integration
-│   │   ├── image_processor.py      # Image manipulation and text overlay
-│   │   ├── translator.py           # GPT-4 translation service
-│   │   └── output_manager.py       # File organization and export
-│   │
-│   ├── compliance/                 # Brand compliance
-│   │   ├── __init__.py
-│   │   ├── brand_checker.py        # Color and font validation
-│   │   ├── color_analyzer.py       # Color extraction and matching
-│   │   └── content_validator.py    # Content compliance rules
-│   │
-│   ├── ui/                         # UI components
-│   │   └── compliance_page.py      # Compliance dashboard
-│   │
-│   └── utils/                      # Utility functions
-│       ├── __init__.py
-│       ├── logger.py               # Logging configuration
-│       ├── validators.py           # Input validation
-│       └── font_finder.py          # System font discovery
-│
-├── data/                           # Data directory
-│   ├── input/
-│   │   ├── assets/                 # Product images
-│   │   └── briefs/                 # Campaign briefs
-│   └── output/                     # Generated campaigns
-│       └── CAMP_ID_TIMESTAMP/      # Campaign output folder
-│           ├── ProductName/        # Product subfolder
-│           │   ├── 1x1.png        # Square format
-│           │   ├── 9x16.png       # Vertical format
-│           │   └── 16x9.png       # Horizontal format
-│           ├── metadata.json       # Campaign metadata
-│           └── compliance_report.json  # Compliance results
-│
-├── examples/                       # Example campaign briefs
-│   ├── sample_brief_en.json
-│   ├── sample_brief_es.json
-│   ├── sample_brief_fr.json
-│   ├── sample_brief_de.json
-│   ├── sample_brief_ja.yaml
-│   └── brand_guidelines.json
-│
-├── tests/                          # Test scripts
-│   ├── verify_setup.py             # Setup verification
-│   ├── test_phase2.py              # Core functionality tests
-│   ├── test_phase3.py              # Integration tests
-│   └── test_phase4.py              # End-to-end tests
-│
-├── tools/                          # Utility tools
-│   ├── generate_images.py          # Standalone image generator
-│   └── project_structure.py        # Structure documentation generator
-│
-├── logs/                           # Application logs
-│   └── pipeline_YYYY-MM-DD.log
-│
-└── docs/                           # Documentation
-    ├── QUICKSTART.md               # Quick start guide
-    ├── COMPLIANCE_GUIDE.md         # Brand compliance documentation
-    ├── GUIDELINES_UPDATE.md        # Guidelines management
-    └── INTEGRATION_COMPLETE.md     # Integration documentation
+================================================================================
+PROJECT STRUCTURE: social-campaign
+================================================================================
+
+📁 social-campaign/
+├── 📁 .streamlit/
+│   └── 📄 config.toml
+├── 📁 data/
+│   ├── 📁 fonts/
+│   │   ├── 📁 fallback/
+│   │   │   └── 📄 NotoSans.ttf
+│   │   ├── 📁 japanese/
+│   │   │   └── 📄 NotoSansJP.ttf
+│   │   ├── 📁 latin/
+│   │   │   └── 📄 DejaVuSans-Bold.ttf
+│   │   └── 📝 README.md
+│   ├── 📁 input/
+│   │   ├── 📁 assets/
+│   │   │   ├── 📄 .gitkeep
+│   │   │   ├── 🖼️ ecobottle.png
+│   │   │   ├── 🖼️ freshshampoo.png
+│   │   │   ├── 🖼️ powerbar.png
+│   │   │   ├── 🖼️ smartwatch.png
+│   │   │   ├── 🖼️ wirelessearbuds_gen.png
+│   │   │   └── 🖼️ wirelessearbuds_generated.png
+│   │   ├── 📁 briefs/
+│   │   │   ├── 📄 .gitkeep
+│   │   │   ├── ⚙️ sample_brief_de_with_generation.json
+│   │   │   ├── ⚙️ sample_brief_en.json
+│   │   │   ├── ⚙️ sample_brief_es.json
+│   │   │   ├── ⚙️ sample_brief_fr.json
+│   │   │   ├── ⚙️ sample_brief_ja.yaml
+│   │   │   └── ⚙️ temp_guidelines.json
+│   ├── 📁 output/
+│   │   ├── 📁 CAMP_2025_002_20251027_134916/
+│   │   │   ├── 📁 EcoBottle/
+│   │   │   │   ├── 🖼️ 16x9.png
+│   │   │   │   ├── 🖼️ 1x1.png
+│   │   │   │   └── 🖼️ 9x16.png
+│   │   │   ├── 📁 PowerBar/
+│   │   │   │   ├── 🖼️ 16x9.png
+│   │   │   │   ├── 🖼️ 1x1.png
+│   │   │   │   └── 🖼️ 9x16.png
+│   │   │   └── ⚙️ metadata.json
+│   │   ├── 📁 CAMP_2025_002_20251027_163930/
+│   │   │   ├── 📁 EcoBottle/
+│   │   │   │   ├── 🖼️ 16x9.png
+│   │   │   │   ├── 🖼️ 1x1.png
+│   │   │   │   └── 🖼️ 9x16.png
+│   │   │   ├── 📁 PowerBar/
+│   │   │   │   ├── 🖼️ 16x9.png
+│   │   │   │   ├── 🖼️ 1x1.png
+│   │   │   │   └── 🖼️ 9x16.png
+│   │   │   └── ⚙️ metadata.json
+│   │   ├── 📁 CAMP_2025_003_20251027_133332/
+│   │   │   ├── 📁 FreshShampoo/
+│   │   │   │   ├── 🖼️ 16x9.png
+│   │   │   │   ├── 🖼️ 1x1.png
+│   │   │   │   └── 🖼️ 9x16.png
+│   │   │   └── ⚙️ metadata.json
+│   │   ├── 📁 CAMP_2025_003_20251027_133602/
+│   │   │   ├── 📁 FreshShampoo/
+│   │   │   │   ├── 🖼️ 16x9.png
+│   │   │   │   ├── 🖼️ 1x1.png
+│   │   │   │   └── 🖼️ 9x16.png
+│   │   │   └── ⚙️ metadata.json
+│   │   ├── 📁 CAMP_2025_003_20251027_135830/
+│   │   │   ├── 📁 FreshShampoo/
+│   │   │   │   ├── 🖼️ 16x9.png
+│   │   │   │   ├── 🖼️ 1x1.png
+│   │   │   │   └── 🖼️ 9x16.png
+│   │   │   └── ⚙️ metadata.json
+│   │   ├── 📁 CAMP_2025_003_20251027_165415/
+│   │   │   ├── 📁 FreshShampoo/
+│   │   │   │   ├── 🖼️ 16x9.png
+│   │   │   │   ├── 🖼️ 1x1.png
+│   │   │   │   └── 🖼️ 9x16.png
+│   │   │   └── ⚙️ metadata.json
+│   │   ├── 📁 CAMP_2025_005_20251027_135733/
+│   │   │   ├── 📁 EcoBottle/
+│   │   │   │   ├── 🖼️ 16x9.png
+│   │   │   │   ├── 🖼️ 1x1.png
+│   │   │   │   └── 🖼️ 9x16.png
+│   │   │   ├── 📁 FreshShampoo/
+│   │   │   │   ├── 🖼️ 16x9.png
+│   │   │   │   ├── 🖼️ 1x1.png
+│   │   │   │   └── 🖼️ 9x16.png
+│   │   │   └── ⚙️ metadata.json
+│   │   ├── 📁 CAMP_2025_005_20251027_161536/
+│   │   │   ├── 📁 EcoBottle/
+│   │   │   │   ├── 🖼️ 16x9.png
+│   │   │   │   ├── 🖼️ 1x1.png
+│   │   │   │   └── 🖼️ 9x16.png
+│   │   │   ├── 📁 FreshShampoo/
+│   │   │   │   ├── 🖼️ 16x9.png
+│   │   │   │   ├── 🖼️ 1x1.png
+│   │   │   │   └── 🖼️ 9x16.png
+│   │   │   └── ⚙️ metadata.json
+│   │   ├── 📁 font_test/
+│   │   │   ├── 🖼️ 00_size_comparison_grid.png
+│   │   │   ├── 🖼️ 01_key_comparison.png
+│   │   │   ├── 🖼️ 02_override_test_150px.png
+│   │   │   ├── 🖼️ font_030px.png
+│   │   │   ├── 🖼️ font_048px.png
+│   │   │   ├── 🖼️ font_060px.png
+│   │   │   ├── 🖼️ font_080px.png
+│   │   │   ├── 🖼️ font_100px.png
+│   │   │   ├── 🖼️ font_120px.png
+│   │   │   └── 🖼️ font_150px.png
+│   │   └── 📄 .gitkeep
+├── 📁 docs/
+│   ├── 📝 COMPLIANCE_GUIDE.md
+│   ├── 📝 FINAL_STATUS.md
+│   ├── 📝 FONT_FIX_COMPLETE.md
+│   ├── 📄 GUIDELINES_COMPARISON.MD
+│   ├── 📝 GUIDELINES_UPDATE.md
+│   ├── 📝 INTEGRATION_COMPLETE.md
+│   ├── 📝 QUICKSTART.md
+│   └── 📝 UPDATE_SUMMARY.md
+├── 📁 examples/
+│   ├── ⚙️ brand_guidelines.json
+│   ├── ⚙️ brand_guidelines_standard.json
+│   ├── ⚙️ brand_guidelines_strict.json
+│   ├── ⚙️ sample_brief_de_with_generation.json
+│   ├── ⚙️ sample_brief_en.json
+│   ├── ⚙️ sample_brief_es.json
+│   ├── ⚙️ sample_brief_fr.json
+│   └── ⚙️ sample_brief_ja.yaml
+├── 📁 logs/
+│   ├── 📋 pipeline_2025-10-25.log
+│   ├── 📋 pipeline_2025-10-26.log
+│   └── 📋 pipeline_2025-10-27.log
+├── 📁 src/
+│   ├── 📁 compliance/
+│   │   ├── 🐍 __init__.py
+│   │   ├── 🐍 brand_checker.py
+│   │   ├── 🐍 color_analyzer.py
+│   │   └── 🐍 content_validator.py
+│   ├── 📁 models/
+│   │   ├── 🐍 __init__.py
+│   │   ├── 🐍 campaign.py
+│   │   └── 🐍 compliance.py
+│   ├── 📁 services/
+│   │   ├── 🐍 __init__.py
+│   │   ├── 🐍 asset_manager.py
+│   │   ├── 🐍 brief_parser.py
+│   │   ├── 🐍 image_generator.py
+│   │   ├── 🐍 image_processor.py
+│   │   ├── 🐍 output_manager.py
+│   │   ├── 🐍 pipeline.py
+│   │   ├── 🐍 pipeline_enhanced.py
+│   │   └── 🐍 translator.py
+│   ├── 📁 ui/
+│   │   ├── 🐍 campaign_results.py
+│   │   └── 🐍 compliance_page.py
+│   ├── 📁 utils/
+│   │   ├── 🐍 __init__.py
+│   │   ├── 🐍 font_finder.py
+│   │   ├── 🐍 logger.py
+│   │   └── 🐍 validators.py
+│   ├── 🐍 __init__.py
+│   └── 🐍 config.py
+├── 📁 tests/
+│   ├── 🐍 test_font_parameter.py
+│   ├── 🐍 test_phase2.py
+│   ├── 🐍 test_phase3.py
+│   ├── 🐍 test_phase4.py
+│   ├── 🐍 ultra_clear_test.py
+│   └── 🐍 verify_setup.py
+├── 📁 tools/
+│   ├── 🐍 generate_images.py
+│   └── 🐍 project_structure.py
+├── 📄 .env
+├── 📄 .env.example
+├── 📄 .gitignore
+├── 🐍 app.py
+├── 📄 pyproject.toml
+├── 📝 README.md
+├── 📄 requirements.txt
+└── 🔧 start.sh
 ```
 
 ---
